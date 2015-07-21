@@ -1,0 +1,42 @@
+<section class="page" data-ng-controller="DoctorsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Doctor Panel</h1>
+    </div>
+    <div class="list-group">
+
+      <div class="col-xs-12 col-md-3 col-sm-4 docprofile" data-ng-repeat="doctor in doctors">
+
+            <div class="thumbnail" style="padding-bottom: 40px;">
+              <img ng-src={{doctor.profilePic}} alt="..." height="150" width="150">
+              <div class="caption">
+                <h3 data-ng-bind="doctor.name"></h3>
+                <small data-ng-bind="doctor.qualification" class="text-muted"></small> |
+                <small data-ng-bind="doctor.speciality" class="text-muted text-capitalize"></small>
+                <p data-ng-bind="doctor.description"></p>
+                <a data-ng-href="#!/doctors/{{doctor._id}}" class="btn btn-success pull-right">E-Consulting</a>
+              </div>
+                <!--</a>-->
+            </div>
+
+          <!--<small class="list-group-item-text">-->
+				<!--Posted on-->
+				<!--<span data-ng-bind="doctor.created | date:'medium'"></span>-->
+				<!--by-->
+				<!--<span data-ng-bind="doctor.user.displayName"></span>-->
+			<!--</small>-->
+          <!--<h4 class="list-group-item-heading" data-ng-bind="doctor.name"></h4>-->
+          <!--<h4 class="list-group-item-heading" data-ng-bind="doctor.description"></h4>-->
+          <!--<h4 class="list-group-item-heading" data-ng-bind="doctor.qualification"></h4>-->
+
+      </div>
+
+
+
+
+    </div>
+
+    <div class="alert alert-warning text-center" data-ng-hide="!doctors.$resolved || doctors.length">
+    	No Doctors yet, why don't you <a href="/#!/doctors/create">create one</a>?
+    </div>
+
+</section>
