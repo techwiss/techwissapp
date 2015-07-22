@@ -30,7 +30,6 @@ angular.module("app", [
   "app.todo"
 
 ])
-
   // disable spinner in loading-bar
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
@@ -169,7 +168,6 @@ angular.module("app", [
 //    ])
 
       .config(["$routeProvider", "$locationProvider", "JQ_LOAD", function($routeProvider, $locationProvider, jqload) {
-
 
 
       var routes = [
@@ -406,6 +404,19 @@ angular.module("app", [
       });
 
     }])
+.controller('maleBody', function($scope) {
+      $scope.fileCount=0;
+      $scope.$on('$destroy', function() {
+        window.onbeforeunload = undefined;
+      });
+      $scope.$on('$locationChangeStart', function(event, next, current) {
+        console.log($('body').find('div.dg.ac'));
+        $('body').find('div.dg.ac').remove();
+        console.log($('body').find('div.dg.ac'));
+       });
+    });
+
+
 
 
 

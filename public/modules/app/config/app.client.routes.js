@@ -9,6 +9,18 @@ angular.module('app').config(['$stateProvider','JQ_LOAD',
           url: '/app',
           templateUrl: 'modules/app/views/base.html'
         }).
+        state('models', {
+          url: '/models',
+          templateUrl: 'modules/app/views/models/male.html'
+        }).
+        state('female', {
+          url: '/models/female',
+          templateUrl: 'modules/app/views/models/female.html'
+        }).
+        state('kid', {
+          url: '/models/kid',
+          templateUrl: 'modules/app/views/models/kid.html'
+        }).
         state('prescription', {
           url: '/prescription',
           templateUrl: 'modules/app/views/tables/tables.html'

@@ -26,6 +26,15 @@ hr.dashed {
   line-height: 1.57142857;
   font-size: 16px;
 }
+#loading-canvas{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}
 .fa {
   line-height: 1.57142857;
   font-size: 13px;
@@ -4137,6 +4146,17 @@ fieldset[disabled] .btn-youtube.active {
 .main-container .nav-wrap .site-nav .nav-list > li a .badge {
   margin-top: 12px;
 }
+.main-container .nav-wrap .site-nav .nav-list > li a i.ion-ios-body {
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px 0;
+    width: 40px;
+    text-align: center;
+    -webkit-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in;
+}
+
 .main-container .nav-wrap .site-nav .nav-list > li a i.ion {
   display: inline-block;
   font-size: 16px;
