@@ -16,6 +16,11 @@ var ReportSchema = new Schema({
 		required: 'Please fill Report name',
 		trim: true
 	},
+	url: {
+		type: String,
+		required: true,
+		trim:true
+	},
 	created: {
 		type: Date,
 		default: Date.now

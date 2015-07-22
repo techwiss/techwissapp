@@ -130,8 +130,23 @@ exports.checkUpload = function(req, res) {
 exports.upload = function(req, res) {
 	flow.post(req, function(status, filename, original_filename, identifier) {
 		console.log('POST', status, original_filename, identifier);
+		if(status == "done") {
+			var report = new Report();
+			report.user = req.user;
+			report.name = original_filename;
+			report.url = "/reports" + identifier;
+			report.save(function(err) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.jsonp(report);
+				}
+			});
+		}
 		res.status(status).send();
-		flow.write(identifier, res);
+
 	});
 }
 
