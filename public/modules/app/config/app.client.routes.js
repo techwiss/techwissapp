@@ -33,15 +33,15 @@ angular.module('app').config(['$stateProvider','JQ_LOAD',
             }]
           }
         }).
-        state('reports', {
-          url: '/reports',
-          templateUrl: "modules/app/views/forms/uploader.html",
-          resolve: {
-            deps: ["$ocLazyLoad", function(a) {
-              return a.load("flow");
-            }]
-        }
-        }).
+        //state('reports', {
+        //  url: '/reports',
+        //  templateUrl: "modules/app/views/forms/uploader.html",
+        //  resolve: {
+        //    deps: ["$ocLazyLoad", function(a) {
+        //      return a.load("flow");
+        //    }]
+        //}
+        //}).
         state('dashboard', {
           url: '/',
           templateUrl: 'modules/app/views/dashboard.html',
