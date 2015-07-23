@@ -7,8 +7,8 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash'),
-	flow = require('../../app/flow/node-flow.js')('../../../public/reports'),
 	stream = require('stream').Stream;
+var mkdirp = require('mkdirp');
 
 /**
  * Create a Report
@@ -112,6 +112,8 @@ exports.hasAuthorization = function(req, res, next) {
  * Report uploading check
  */
 exports.checkUpload = function(req, res) {
+	var filePath = "public/reports/" + req.user._id;
+	var flow = require('../../app/flow/node-flow.js')('../../../'+filePath);
 	flow.get(req, function(status, filename, original_filename, identifier) {
 		console.log('GET', status);
 		if (status == 'found') {
@@ -128,25 +130,29 @@ exports.checkUpload = function(req, res) {
  */
 
 exports.upload = function(req, res) {
+	var filePath = "public/reports/" + req.user._id;
+	var flow = require('../../app/flow/node-flow.js')('../../../'+filePath);
+		mkdirp(filePath, function(err) {
+			console.log(err, filePath);
+		});
 	flow.post(req, function(status, filename, original_filename, identifier) {
-		console.log('POST', status, original_filename, identifier);
+		//console.log('POST', status, original_filename, identifier);
 		if(status == "done") {
 			var report = new Report();
 			report.user = req.user;
 			report.name = original_filename;
-			report.url = "/reports" + identifier;
+			report.url = filePath + "/" + identifier;
 			report.save(function(err) {
 				if (err) {
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
 					});
 				} else {
-					res.jsonp(report);
+					//res.jsonp(report);
 				}
 			});
 		}
 		res.status(status).send();
-
 	});
 }
 

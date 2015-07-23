@@ -11,6 +11,7 @@ module.exports = flow = function(temporaryFolder) {
 
     try {
         fs.mkdirSync($.temporaryFolder);
+        console.log($.temporaryFolder);
     } catch (e) {}
 
     function cleanIdentifier(identifier) {
@@ -21,8 +22,7 @@ module.exports = flow = function(temporaryFolder) {
         // Clean up the identifier
         identifier = cleanIdentifier(identifier);
         // What would the file name be?
-        var dirPath =  path.resolve(__dirname + $.temporaryFolder, './flow-' + identifier + '.' + chunkNumber);
-        console.log(dirPath);
+        var dirPath =  path.resolve(__dirname + $.temporaryFolder, identifier + '.' + chunkNumber);
         return dirPath;
     }
 
@@ -190,8 +190,6 @@ module.exports = flow = function(temporaryFolder) {
             //console.log('removing pipeChunkRm ', number, 'chunkFilename', chunkFilename);
             fs.exists(chunkFilename, function(exists) {
                 if (exists) {
-
-                    console.log('exist removing ', chunkFilename);
                     fs.unlink(chunkFilename, function(err) {
                         if (err && options.onError) options.onError(err);
                     });
