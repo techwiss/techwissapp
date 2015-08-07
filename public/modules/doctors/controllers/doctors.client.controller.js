@@ -1,8 +1,8 @@
 'use strict';
 
 // Doctors controller
-angular.module('doctors').controller('DoctorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Doctors','Upload',
-	function($scope, $stateParams, $location, Authentication, Doctors, Upload) {
+angular.module('doctors').controller('DoctorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Doctors',
+	function($scope, $stateParams, $location, Authentication, Doctors) {
 		$scope.authentication = Authentication;
     $scope.profilePic ="https://cdn0.iconfinder.com/data/icons/customicondesign-office6-shadow/256/doctor.png";
 
@@ -175,6 +175,7 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
     $scope.timeZone = $scope.defaultTimeZone;
 
     //Upload ProfilePic
+    /*
     $scope.$watch('files', function () {
       $scope.upload($scope.files);
     });
@@ -200,7 +201,7 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
         }
       }
     };
-
+*/
 		// Create new Doctor
 		$scope.create = function() {
 			// Create new Doctor object

@@ -4,19 +4,42 @@
     </div>
     <div class="list-group">
 
-      <div class="col-xs-12 col-md-3 col-sm-4 docprofile" data-ng-repeat="doctor in doctors">
-
-            <div class="thumbnail" style="padding-bottom: 40px;">
-              <img ng-src={{doctor.profilePic}} alt="..." height="150" width="150">
-              <div class="caption">
-                <h3 data-ng-bind="doctor.name"></h3>
-                <small data-ng-bind="doctor.qualification" class="text-muted"></small> |
-                <small data-ng-bind="doctor.speciality" class="text-muted text-capitalize"></small>
-                <p data-ng-bind="doctor.description"></p>
-                <a data-ng-href="#!/doctors/{{doctor._id}}" class="btn btn-success pull-right">E-Consulting</a>
+      <div class="col-xs-12 col-md-3 col-sm-4" data-ng-repeat="doctor in doctors">
+        <div class="panel panel-default mb20 mini-box panel-hovered">
+          <div class="panel-body">
+            <div class="clearfix">
+              <img ng-src={{doctor.profilePic}} alt="..." height="100%" width="100%">
+              <br/>
+              <div class="info left">
+                <!--<h5 class="text-dark mb0">Doctors Available</h5>-->
+                <!--<h4 class="mt0 text-success text-bold">50</h4>-->
+                <div class="caption">
+                  <h3 data-ng-bind="doctor.name"></h3>
+                  <small data-ng-bind="doctor.qualification" class="text-muted"></small> |
+                  <small data-ng-bind="doctor.speciality" class="text-muted text-capitalize"></small>
+                  <p data-ng-bind="doctor.description"></p>
+                </div>
               </div>
-                <!--</a>-->
+              <a data-ng-href="#!/doctors/{{doctor._id}}" class="btn btn-success pull-right">E-Consulting</a>
+
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="col-xs-12 col-md-3 col-sm-4 docprofile" data-ng-repeat="doctor in doctors">-->
+
+            <!--<div class="thumbnail" style="padding-bottom: 40px;">-->
+              <!--<img ng-src={{doctor.profilePic}} alt="..." height="150" width="150">-->
+              <!--<div class="caption">-->
+                <!--<h3 data-ng-bind="doctor.name"></h3>-->
+                <!--<small data-ng-bind="doctor.qualification" class="text-muted"></small> |-->
+                <!--<small data-ng-bind="doctor.speciality" class="text-muted text-capitalize"></small>-->
+                <!--<p data-ng-bind="doctor.description"></p>-->
+                <!--<a data-ng-href="#!/doctors/{{doctor._id}}" class="btn btn-success pull-right">E-Consulting</a>-->
+              <!--</div>-->
+                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+            <!--</div>-->
 
           <!--<small class="list-group-item-text">-->
 				<!--Posted on-->
@@ -28,7 +51,7 @@
           <!--<h4 class="list-group-item-heading" data-ng-bind="doctor.description"></h4>-->
           <!--<h4 class="list-group-item-heading" data-ng-bind="doctor.qualification"></h4>-->
 
-      </div>
+      <!--</div>-->
 
 
 
