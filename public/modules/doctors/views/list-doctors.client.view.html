@@ -14,7 +14,7 @@
                 <!--<h5 class="text-dark mb0">Doctors Available</h5>-->
                 <!--<h4 class="mt0 text-success text-bold">50</h4>-->
                 <div class="caption">
-                  <h3 data-ng-bind="doctor.name"></h3>
+                  <h4 data-ng-bind="doctor.name | limitTo : 15"></h4>
                   <small data-ng-bind="doctor.qualification" class="text-muted"></small> |
                   <small data-ng-bind="doctor.speciality" class="text-muted text-capitalize"></small>
                   <p data-ng-bind="doctor.description | limitTo : 50"></p>
