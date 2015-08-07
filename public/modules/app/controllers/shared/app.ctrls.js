@@ -142,12 +142,12 @@ angular.module("app.ctrls", [])
 	$scope.analyticsconfig = {
 		data: {
 			columns: [
-				['Network Load', 30, 100, 80, 140, 150, 200],
-				['CPU Load', 90, 100, 170, 140, 150, 50]
+				['Blood Pressure', 30, 100, 80, 140, 150, 200],
+				['Sugar Level', 90, 100, 170, 140, 150, 50]
 			],
 			type: 'spline',
 			types: {
-				'Network Load': 'bar'
+				'Blood Pressure': 'bar'
 			}
 		},
 		color: {
@@ -192,10 +192,10 @@ angular.module("app.ctrls", [])
 	$scope.browserconfig = {
 		data: {
 			columns: [
-			["Chrome", 48.9],
-			["Firefox", 16.1],
-			["Safari", 10.9],
-			["IE", 17.1],
+			["carbohydrates", 48.9],
+			["protein", 16.1],
+			["Vitamin", 10.9],
+			["Minerals", 17.1],
 			["Other",7]
 			],
 			type: "donut",
