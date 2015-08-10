@@ -3,7 +3,15 @@
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
 	function($scope, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
-
+    $scope.avatarData = [{
+      id: "modules/app/images/admin.jpg",
+      title: 'avatar 1',
+      value: 'avatar-1'
+    },{
+      id: "modules/app/images/admin.jpg",
+      title: 'avatar 2',
+      value: 'avatar-2'
+    }];
 		// If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
 

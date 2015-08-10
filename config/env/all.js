@@ -1,17 +1,17 @@
 'use strict';
 
 module.exports = {
-	app: {
-		title: 'Techwiss',
-		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
-		keywords: 'MongoDB, Express, AngularJS, Node.js'
-	},
-	port: process.env.PORT || 3000,
-	templateEngine: 'swig',
-	sessionSecret: 'MEAN',
-	sessionCollection: 'sessions',
-	assets: {
-		lib: {
+  app: {
+    title: 'Techwiss',
+    description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
+    keywords: 'MongoDB, Express, AngularJS, Node.js'
+  },
+  port: process.env.PORT || 3000,
+  templateEngine: 'swig',
+  sessionSecret: 'MEAN',
+  sessionCollection: 'sessions',
+  assets: {
+    lib: {
       //css: [
       //  'public/lib/bootstrap/dist/css/bootstrap.css',
       //  'public/lib/bootstrap/dist/css/bootstrap-theme.css',
@@ -19,24 +19,24 @@ module.exports = {
       css: [
         'public/modules/app/styles/vendors/angular-material.min.css',
         'public/modules/app/styles/vendors/bootstrap.min.css',
-          'public/modules/app/_tmp/main.min.css'
+        'public/modules/app/_tmp/main.min.css'
       ],
-			js: [
+      js: [
         'public/lib/jquery/dist/jquery.js',
         'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js',
         //'public/lib/angular/angular.js',
         //'public/lib/vendors/angular.min.js',
-          'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.js',
-'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js',
-          'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js',
-				//'public/lib/angular-resource/angular-resource.js',
-				//'public/lib/angular-cookies/angular-cookies.js',
-				//'public/lib/angular-animate/angular-animate.js',
-				'public/lib/angular-touch/angular-touch.js', 
-				'public/lib/angular-sanitize/angular-sanitize.js', 
-				'public/lib/angular-ui-router/release/angular-ui-router.js',
-				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js',
+        //'public/lib/angular-resource/angular-resource.js',
+        //'public/lib/angular-cookies/angular-cookies.js',
+        //'public/lib/angular-animate/angular-animate.js',
+        'public/lib/angular-touch/angular-touch.js',
+        'public/lib/angular-sanitize/angular-sanitize.js',
+        'public/lib/angular-ui-router/release/angular-ui-router.js',
+        'public/lib/angular-ui-utils/ui-utils.js',
+        'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/ng-file-upload/ng-file-upload-shim.min.js',
         'public/lib/ng-file-upload/ng-file-upload.min.js',
         'public/modules/app/controllers/plugins/angular-route.min.js',
@@ -60,22 +60,22 @@ module.exports = {
         'public/modules/app/controllers/models/js/UCSCharacter.js',
         'public/modules/app/controllers/models/js/data.gui.js',
         'public/modules/app/controllers/models/js/orbit.js',
-
+        'public/modules/app/SimpleWebRTC/socket.io.js'
       ]
-		},
-		//css: [
-		//	'public/modules/**/css/*.css'
-		//],
-		js: [
-			'public/config.js',
-			'public/application.js',
-			'public/modules/*/*.js',
-			'public/modules/*/*[!tests]*/*.js'
-		],
-		tests: [
-        //'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js',
-			'public/lib/angular-mocks/angular-mocks.js',
-			'public/modules/*/tests/*.js'
-		]
-	}
+    },
+    //css: [
+    //	'public/modules/**/css/*.css'
+    //],
+    js: [
+      'public/config.js',
+      'public/application.js',
+      'public/modules/*/*.js',
+      'public/modules/*/*[!tests]*/*.js'
+    ],
+    tests: [
+      //'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js',
+      'public/lib/angular-mocks/angular-mocks.js',
+      'public/modules/*/tests/*.js'
+    ]
+  }
 };

@@ -1,5 +1,8 @@
 <section class="page" data-ng-controller="DoctorsController" data-ng-init="findOne()">
-	<div class="page-header">
+  <div ng-hide="true" id="vichatid">{{doctor._id}}</div>
+  <div ng-hide="true" id="vichattime">{{doctor.duration}}</div>
+
+  <div class="page-header">
     <h1 data-ng-bind="doctor.name"></h1>
 	</div>
 
@@ -27,9 +30,8 @@
         <div class="panel-heading">Patient's Camera</div>
         <div class="panel-body">
           <div class="clearfix">
-                <video autoplay="true" id="videoElement" style="width:100%;">
-             
-                </video>
+            <video id="localVideo" style="width: 100%;" oncontextmenu="return false;"></video>
+            <div id="localVolume" class="volume_bar"></div>
             <div class="info left">
               <h5 class="text-light mb0"><b>Patient Name:</b> Robert Smith</h5>
             </div>
@@ -49,8 +51,8 @@
         <div class="panel-heading">Doctor's Camera</div>
         <div class="panel-body">
           <div class="clearfix">
-                <video autoplay="true" id="videoDocElement" style="width:100%;">
-                </video>
+            <div id="remotes"></div>
+
             <div class="info left">
               <h5 class="text-light mb0"><b>Doctor's Name:</b> {{doctor.name}}</h5>
             </div>
@@ -66,21 +68,53 @@
     </div>
   </div>
 
-  <script>
-    var video = document.querySelector("#videoElement");
 
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+     <!--<h1 data-ng-bind="seller.title"></h1>-->
+    <!--<span class="glyphicon glyphicon-time" aria-hidden="true" id="timeicon" style="display: none"></span>-->
+    <!--<span id="time"></span>-->
+  <!--<div class="row">-->
+    <!--<div class="col-md-6">-->
+      <!--<div class="well">-->
+        <!--<div class="pull-right">-->
+          <!--<b>Name:</b> {{doctor.name}}<br>-->
+          <!--<b>Topic:</b> {{doctor.title}}-->
+        <!--</div>-->
 
-    if (navigator.getUserMedia) {
-      navigator.getUserMedia({video: true}, handleVideo, videoError);
-    }
+        <!--<div class="videoContainer">-->
+          <!--&lt;!&ndash;<video id="localVideo" style="height: 100%;" oncontextmenu="return false;"></video>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div id="localVolume" class="volume_bar"></div>&ndash;&gt;-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-6">-->
+      <!--<div class="well">-->
+        <!--<div class="pull-right">-->
+          <!--&lt;!&ndash;<b>Name: {{seller.name}}<br>&ndash;&gt;-->
+          <!--&lt;!&ndash;<b>Topic: {{seller.title}}&ndash;&gt;-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
 
-    function handleVideo(stream) {
-      video.src = window.URL.createObjectURL(stream);
-    }
 
-    function videoError(e) {
-      // do something
-    }
-    </script>
+  <!--<script>-->
+    <!--var video = document.querySelector("#videoElement");-->
+
+    <!--navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;-->
+
+    <!--if (navigator.getUserMedia) {-->
+      <!--navigator.getUserMedia({video: true}, handleVideo, videoError);-->
+    <!--}-->
+
+    <!--function handleVideo(stream) {-->
+      <!--video.src = window.URL.createObjectURL(stream);-->
+    <!--}-->
+
+    <!--function videoError(e) {-->
+      <!--// do something-->
+    <!--}-->
+    <!--</script>-->
 </section>
+
+<script src="SimpleWebRTC/simplewebrtc.bundle.js"></script>
+<script src="SimpleWebRTC/myownchat.js"></script>
