@@ -26,13 +26,13 @@
             <div flex>
               <md-input-container>
               <label>First Name</label>
-              <input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">
+              <input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName">
             </md-input-container>
             </div>
             <div flex>
               <md-input-container>
                 <label>Last Name</label>
-                <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">
+                <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName">
               </md-input-container>
             </div>
           </div>
@@ -41,24 +41,24 @@
             <div flex>
             <md-input-container>
             <label>User Name</label>
-              <input type="text" required id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+              <input type="text" required id="username" name="username" class="form-control" data-ng-model="credentials.username">
           </md-input-container>
             </div>
             <div flex>
           <md-input-container>
             <label>Email Id</label>
-            <input type="email" required id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">
+            <input type="email" required id="email" name="email" class="form-control" data-ng-model="credentials.email">
           </md-input-container>
             </div>
           </div>
 
           <md-input-container>
             <label>Password</label>
-            <input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+            <input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password">
           </md-input-container>
           <md-input-container>
             <label>Retype Password</label>
-            <input type="password" id="password" name="password" class="form-control" data-ng-model="confirmPassword" placeholder="Password">
+            <input type="password" id="password" name="password" class="form-control" data-ng-model="confirmPassword">
           </md-input-container>
 
           <div class="clearfix mt10">
@@ -76,7 +76,9 @@
         </form>
 
       </div>
-
+      <div data-ng-show="error" class="text-center text-danger">
+      <strong data-ng-bind="error"></strong>
+      </div>
     </div> <!-- #end signin-container -->
   </div>
 

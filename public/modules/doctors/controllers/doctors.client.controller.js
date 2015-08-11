@@ -8,15 +8,6 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
     $scope.name = $scope.authentication.user.displayName;
     $scope.profilePic ="https://cdn0.iconfinder.com/data/icons/customicondesign-office6-shadow/256/doctor.png";
 
-    console.log($location.path());
-    if($location.path() == '/doctors/create'){
-      if ($scope.authentication.user == '')
-      {
-        alert('Please sign in to Add Doctor');
-        window.location.href ='/#!/signin';
-      }
-    }
-
     //TimeZone Calculation
     $scope.timeZoneArray = {
       '(GMT-12:00) International Date Line West' : 'Pacific/Wake',
@@ -247,6 +238,8 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
         $scope.speciality = '';
         $scope.description = '';
         $scope.timeZone = '';
+        $scope.location = [];
+        $scope.homeVisit = false;
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

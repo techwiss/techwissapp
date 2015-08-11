@@ -1,6 +1,7 @@
 <section class="page" data-ng-controller="DoctorsController">
     <div class="page-header">
         <h1>Doctor Profile</h1>
+      <small>Please fill up your Profile first to get started </small>
     </div>
 
   <div  id="crete-doc" class="panel panel-default mb20 mini-box panel-hovered col-md-12">
@@ -114,6 +115,7 @@
           <div class="form-group">
             <input type="submit" class="btn btn-success pull-right" value="Create">
           </div>
+
           <div data-ng-show="error" class="text-danger">
             <strong data-ng-bind="error"></strong>
           </div>
