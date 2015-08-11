@@ -60,6 +60,7 @@ module.exports = {
         'public/modules/app/controllers/models/js/UCSCharacter.js',
         'public/modules/app/controllers/models/js/data.gui.js',
         'public/modules/app/controllers/models/js/orbit.js',
+        'public/lib/angular-google-places-autocomplete/src/autocomplete.js',
         'public/modules/app/SimpleWebRTC/socket.io.js'
       ]
     },

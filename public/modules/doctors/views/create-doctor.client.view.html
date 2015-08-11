@@ -3,9 +3,10 @@
         <h1>Doctor Profile</h1>
     </div>
 
-  <div  id="crete-doc" class="panel col-md-12">
+  <div  id="crete-doc" class="panel panel-default mb20 mini-box panel-hovered col-md-12">
       <form class="form-horizontal" style="margin-top:30px;" data-ng-submit="create()" novalidate>
         <div id ="create-doc-right" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+<div>
           <div id="doctor-profilepic" class="text-center">
               <img ng-src="{{profilePic}}" class="avatar img-thumbnail" alt="avatar" height="250" width="250">
               <h6><i>Profile Picture</i></h6>
@@ -16,9 +17,9 @@
           </div>
 
           <div class="form-group">
-            <label class="control-label" for="name">Name</label>
+            <label class="control-label" for="name">Name: </label>
+            <span data-ng-bind="name | capitalize"></span>
             <div class="controls">
-              <input type="text" data-ng-model="name" id="name" class="form-control marg_less" placeholder="Name" required>
             </div>
           </div>
 
@@ -37,55 +38,32 @@
           <!--</div>-->
 
 
+</div>
         </div>
 
         <div id="create-doc-left" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
           <div class="form-group">
             <label class="control-label" for="qualification">Are you Available to visit Patients?</label>
             <div class="controls">
-              <md-radio-group ng-model="credentials.accountType">
+              <md-radio-group data-ng-model="homeVisit">
                 <div layout="row">
                   <div flex>
-                    <md-radio-button value="Yes" class="md-primary"> Yes, I shall visit Patients. </md-radio-button>
+                    <md-radio-button value="true" class="md-primary"> Yes, I shall visit Patients </md-radio-button>
                   </div>
                   <div flex>
-                    <md-radio-button value="doctor">No, just Video-Consulting</md-radio-button>
+                    <md-radio-button value="false">No, just Video-Consulting</md-radio-button>
                   </div>
                 </div>
               </md-radio-group>
             </div>
           </div>
 
-          <div class="well form-group">
-            <label class="control-label" for="qualification">Kindly mention the area you prefer visiting Patients in</label>
+          <div class="well form-group" ng-show="homeVisit=='true'">
+            <label class="control-label" for="qualification">Kindly mention the locality where prefer visiting Patients:</label>
             <div class="controls">
-              <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-              <!--<script type="text/javascript">-->
-                <!--google.maps.event.addDomListener(window, 'load', function () {-->
-                  <!--var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));-->
-                  <!--google.maps.event.addListener(places, 'place_changed', function () {-->
-                    <!--var place = places.getPlace();-->
-                    <!--var address = place.formatted_address;-->
-                    <!--var latitude = place.geometry.location.A;-->
-                    <!--var longitude = place.geometry.location.F;-->
-                    <!--var mesg = "Address: " + address;-->
-                    <!--mesg += "\nLatitude: " + latitude;-->
-                    <!--mesg += "\nLongitude: " + longitude;-->
-                    <!--alert(mesg);-->
-                  <!--});-->
-                <!--});-->
-              <!--</script>-->
-              <span>Location:</span>
-              <input type="text" id="txtPlaces" style="width: 250px" placeholder="Enter a location" />
-
-            </div>
-
-          </div>
-          <div class="form-group">
-            <label class="control-label" for="qualification">Qualification</label>
-            <div class="controls" data-ng-init="qualification=['']">
-              <input style="margin-bottom: 15px;" type="text" ng-repeat="q in qualification track by $index" data-ng-model="qualification[$index]" id="qualification" class="form-control marg_less" placeholder="Qualification {{$index+1}}" required>
-              <a href="javascript:;" data-ng-click="qualification.push('');">Add More</a>
+              <input class="form-control" g-places-autocomplete ng-model="place" placeholder="Location"/>
+              <small>{{place.geometry.location.lat()| limitTo : 9}},{{place.geometry.location.lng() | limitTo : 9}}
+              willing to visit Patients around 20 miles from this position</small>
             </div>
           </div>
 
@@ -104,6 +82,13 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label class="control-label" for="qualification">Qualification</label>
+            <div class="controls" data-ng-init="qualification=['']">
+              <input style="margin-bottom: 15px;" type="text" ng-repeat="q in qualification track by $index" data-ng-model="qualification[$index]" id="qualification" class="form-control marg_less" placeholder="Qualification {{$index+1}}" required>
+              <a href="javascript:;" data-ng-click="qualification.push('');">Add More</a>
+            </div>
+          </div>
           <!--<div class="form-group">-->
             <!--<label class="control-label" for="availability">Availability</label>-->
             <!--<div class="controls">-->

@@ -31,6 +31,10 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
 	},
+  completeProfile: {
+    type: Boolean,
+    default: false
+  },
   accountType: {
     type: String,
     default: 'patient',

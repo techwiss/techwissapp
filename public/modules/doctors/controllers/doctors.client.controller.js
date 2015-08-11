@@ -3,7 +3,9 @@
 // Doctors controller
 angular.module('doctors').controller('DoctorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Doctors',
 	function($scope, $stateParams, $location, Authentication, Doctors) {
-		$scope.authentication = Authentication;
+    $scope.place;
+    $scope.authentication = Authentication;
+    $scope.name = "Dr. " + $scope.authentication.user.displayName;
     $scope.profilePic ="https://cdn0.iconfinder.com/data/icons/customicondesign-office6-shadow/256/doctor.png";
 
     console.log($location.path());
