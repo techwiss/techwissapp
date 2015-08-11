@@ -1,4 +1,4 @@
-<div class="nav-head">
+<div class="nav-head" ng-controller="navController">
   <!-- site logo -->
   <a href="#/dashboard" class="site-logo text-uppercase">
     <i class="ion ion-disc"></i>
@@ -13,7 +13,7 @@
   <div class="profile clearfix mb15">
     <img src="modules/app/images/admin.jpg" alt="admin">
     <div class="group">
-      <h5 class="name">Robert Smith</h5>
+      <h5 class="name" ng-bind="authentication.user.displayName"></h5>
       <small class="desig text-uppercase">Welcome</small>
     </div>
   </div>

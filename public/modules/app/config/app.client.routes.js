@@ -1,7 +1,8 @@
 'use strict';
 
 // Setting up route
-angular.module('app').config(['$stateProvider','JQ_LOAD',
+angular.module('app')
+    .config(['$stateProvider','JQ_LOAD',
 	function($stateProvider,jqload) {
 		// Users state routing
     $stateProvider.
@@ -76,6 +77,18 @@ angular.module('app').config(['$stateProvider','JQ_LOAD',
           }
 
         });
-
 	}
-]);
+])
+    .run(['Authentication','$rootScope','$location',(function(Authentication,$rootScope,$location) {
+  $rootScope.$on( "$locationChangeStart", function(event, next, current) {
+    $rootScope.authentication = Authentication;
+    if ($rootScope.authentication.user == '')
+    {
+      if($location.path() !== '/signup')
+      {
+        $location.path( "/signin" );
+        return;
+      }
+    }
+  })
+})]);

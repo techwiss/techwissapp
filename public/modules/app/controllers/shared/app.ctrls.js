@@ -5,7 +5,7 @@
 angular.module("app.ctrls", [])
 
 // Root Controller
-.controller("AppCtrl", ["$rootScope", "$scope", "$timeout", function($rs, $scope, $timeout) {
+.controller("AppCtrl", ['Authentication',"$rootScope", "$scope", "$timeout", function(Authentication,$rs, $scope, $timeout) {
       $scope.applicationState = "Dashboard";
       //$scope.applicationState = "Homepage";
 

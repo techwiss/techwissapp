@@ -33,8 +33,8 @@ var UserSchema = new Schema({
 	},
   accountType: {
     type: String,
-    trim: true,
-    default: 'doctor'
+    default: 'patient',
+    required: 'Please select an Account Type'
   },
   lastName: {
 		type: String,
