@@ -27,13 +27,13 @@
   <div class="row">
     <div class="col-md-6 col-sm-6">
       <div class="panel panel-default mb20 mini-box panel-hovered">
-        <div class="panel-heading">Patient's Camera</div>
+        <div class="panel-heading">Your Camera</div>
         <div class="panel-body">
           <div class="clearfix">
             <video id="localVideo" style="width: 100%;" oncontextmenu="return false;"></video>
             <div id="localVolume" class="volume_bar"></div>
             <div class="info left">
-              <h5 class="text-light mb0"><b>Patient Name:</b> Robert Smith</h5>
+              <h5 class="text-light mb0"><b>User Name:</b> {{authentication.user.displayName}}</h5>
             </div>
 
             <div class="right ion ion-ios-people-outline icon"></div>
@@ -48,13 +48,13 @@
 
     <div class="col-md-6 col-sm-6">
       <div class="panel panel-default mb20 mini-box panel-hovered">
-        <div class="panel-heading">Doctor's Camera</div>
+        <div class="panel-heading">Guest Camera</div>
         <div class="panel-body">
           <div class="clearfix">
             <div id="remotes"></div>
 
             <div class="info left">
-              <h5 class="text-light mb0"><b>Doctor's Name:</b> {{doctor.name}}</h5>
+              <h5 class="text-light mb0"><b>User Name:</b> {{doctor.name}}</h5>
             </div>
 
             <div class="right ion ion-ios-people-outline icon"></div>
