@@ -20,11 +20,13 @@ var DoctorSchema = new Schema({
     type: String,
     default: 'https://cdn0.iconfinder.com/data/icons/customicondesign-office6-shadow/256/doctor.png'
   },
+  homeVisit: {
+    type: Boolean,
+    default: false
+  },
   location: {
-    type: String,
-    default: 'USA',
-    required: 'Please fill Doctor location',
-    trim: true
+    type: [Number],  // [<longitude>, <latitude>]
+    index: '2d'      // create the geospatial index
   },
   qualification: [],
   speciality: {

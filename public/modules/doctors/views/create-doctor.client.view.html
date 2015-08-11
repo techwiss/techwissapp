@@ -18,7 +18,7 @@
 
           <div class="form-group">
             <label class="control-label" for="name">Name: </label>
-            <span data-ng-bind="name | capitalize"></span>
+            Dr. <span data-ng-bind="name | capitalize"></span>
             <div class="controls">
             </div>
           </div>
@@ -48,21 +48,21 @@
               <md-radio-group data-ng-model="homeVisit">
                 <div layout="row">
                   <div flex>
-                    <md-radio-button value="true" class="md-primary"> Yes, I shall visit Patients </md-radio-button>
+                    <md-radio-button data-ng-value="true" class="md-primary"> Yes, I shall visit Patients </md-radio-button>
                   </div>
                   <div flex>
-                    <md-radio-button value="false">No, just Video-Consulting</md-radio-button>
+                    <md-radio-button data-ng-value="false">No, just Video-Consulting</md-radio-button>
                   </div>
                 </div>
               </md-radio-group>
             </div>
           </div>
 
-          <div class="well form-group" ng-show="homeVisit=='true'">
+          <div class="well form-group" ng-show="homeVisit">
             <label class="control-label" for="qualification">Kindly mention the locality where prefer visiting Patients:</label>
             <div class="controls">
               <input class="form-control" g-places-autocomplete ng-model="place" placeholder="Location"/>
-              <small>{{place.geometry.location.lat()| limitTo : 9}},{{place.geometry.location.lng() | limitTo : 9}}
+              <small>{{place.geometry.location.lng() | limitTo : 9}},{{place.geometry.location.lat()| limitTo : 9}}
               willing to visit Patients around 20 miles from this position</small>
             </div>
           </div>

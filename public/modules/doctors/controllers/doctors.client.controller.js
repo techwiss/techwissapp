@@ -5,7 +5,7 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Doctors) {
     $scope.place;
     $scope.authentication = Authentication;
-    $scope.name = "Dr. " + $scope.authentication.user.displayName;
+    $scope.name = $scope.authentication.user.displayName;
     $scope.profilePic ="https://cdn0.iconfinder.com/data/icons/customicondesign-office6-shadow/256/doctor.png";
 
     console.log($location.path());
@@ -207,14 +207,34 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
 		// Create new Doctor
 		$scope.create = function() {
 			// Create new Doctor object
-			var doctor = new Doctors ({
-        name: this.name,
-        profilePic: this.profilePic,
-        qualification: this.qualification,
-        speciality: this.speciality,
-        description: this.description,
-        timeZone: this.timeZone
-      });
+      if (this.homeVisit) {
+        this.location = [];
+        this.location.push($scope.place.geometry.location.lng());
+        this.location.push($scope.place.geometry.location.lat());
+        var doctor = new Doctors({
+          name: this.name,
+          profilePic: this.profilePic,
+          qualification: this.qualification,
+          speciality: this.speciality,
+          description: this.description,
+          homeVisit: this.homeVisit,
+          location: this.location,
+          timeZone: this.timeZone
+        });
+        console.log(doctor);
+      }
+      else{
+        var doctor = new Doctors({
+          name: this.name,
+          profilePic: this.profilePic,
+          qualification: this.qualification,
+          speciality: this.speciality,
+          description: this.description,
+          homeVisit: this.homeVisit,
+          timeZone: this.timeZone
+        });
+        console.log(doctor);
+      }
 
 			// Redirect after save
 			doctor.$save(function(response) {
