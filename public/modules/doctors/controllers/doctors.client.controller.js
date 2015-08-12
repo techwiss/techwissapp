@@ -1,8 +1,8 @@
 'use strict';
 
 // Doctors controller
-angular.module('doctors').controller('DoctorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Doctors',
-	function($scope, $stateParams, $location, Authentication, Doctors) {
+angular.module('doctors').controller('DoctorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Doctors','Users',
+	function($scope, $stateParams, $location, Authentication, Doctors, Users) {
     $scope.place;
     $scope.authentication = Authentication;
     $scope.name = $scope.authentication.user.displayName;
@@ -195,6 +195,18 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
       }
     };
 */
+    // Create new Doctor
+    $scope.userProfileFlagUpdate = function(urs) {
+      $scope.success = $scope.error = null;
+    var user = new Users(urs);
+    user.$update(function(response) {
+      $scope.success = true;
+      Authentication.user = response;
+    }, function(response) {
+      $scope.error = response.data.message;
+    });
+  };
+
 		// Create new Doctor
 		$scope.create = function() {
 			// Create new Doctor object
@@ -229,9 +241,15 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
 
 			// Redirect after save
 			doctor.$save(function(response) {
-				$location.path('doctors/' + response._id);
+        // Upade user compleProfile Flag
+        var temp_user = $scope.authentication.user;
+        console.log(temp_user);
+        temp_user.completeProfile = true;
+        console.log(temp_user);
+        $scope.userProfileFlagUpdate(temp_user);
 
-				// Clear form fields
+        $location.path('doctors');
+        // Clear form fields
         $scope.name = '';
         $scope.profilePic = '';
         $scope.qualification = '';
