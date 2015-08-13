@@ -136,8 +136,6 @@ angular.module("app.todo", [])
 		store.put(todos);
 	}
 
-
-
 }])
 
 
