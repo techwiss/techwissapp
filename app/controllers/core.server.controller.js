@@ -28,7 +28,7 @@ exports.index = function(req, res) {
 exports.sendEmail = function(req, res) {
   var data = req.body;
   var mailOptions = {
-    from: 'gehlotchirag777@gmail.com',
+    from: 'TechWiss Team <gehlotchirag777@gmail.com>',
     to: data.to,
     subject: data.subject,
     text: data.text
