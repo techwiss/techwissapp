@@ -10,8 +10,8 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'techwiss@gmail.com',
-    pass: 'Qwerty123456#'
+    user: 'gehlotchirag@gmail.com',
+    pass: 'Gandhi007'
   }
 });
 
@@ -28,7 +28,7 @@ exports.index = function(req, res) {
 exports.sendEmail = function(req, res) {
   var data = req.body;
   var mailOptions = {
-    from: 'TechWiss Team <techwiss@gmail.com>',
+    from: 'TechWiss Team <gehlotchirag@gmail.com>',
     to: data.to,
     subject: data.subject,
     text: data.text
