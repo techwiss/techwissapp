@@ -419,7 +419,7 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$
         var data = ({
           to: to,
           subject: 'TechWiss - Video Consulting Initiation Link',
-          text: 'appointments/' + appointmentId
+          html: '<a href="window.location.host+'/appointments/' + appointmentId">window.location.host+'/appointments/' + appointmentId'
         });
 
         $http.post('/appointment-email', data).
