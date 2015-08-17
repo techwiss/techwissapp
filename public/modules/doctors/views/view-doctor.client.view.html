@@ -1,120 +1,33 @@
 <section class="page" data-ng-controller="DoctorsController" data-ng-init="findOne()">
-  <div ng-hide="true" id="vichatid">{{doctor._id}}</div>
-  <div ng-hide="true" id="vichattime">{{doctor.duration}}</div>
-
   <div class="page-header">
-    <h1 data-ng-bind="doctor.name"></h1>
-	</div>
+    <h3 data-ng-bind="doctor.name"></h3>
+  </div>
 
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == doctor.user._id))">
-		<a class="btn btn-primary" href="/#!/doctors/{{doctor._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
+  <!--<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == doctor.user._id))">-->
+    <!--<a class="btn btn-primary" href="/#!/doctors/{{doctor._id}}/edit">-->
+      <!--<i class="glyphicon glyphicon-edit"></i>-->
+    <!--</a>-->
+    <!--<a class="btn btn-primary" data-ng-click="remove();">-->
+      <!--<i class="glyphicon glyphicon-trash"></i>-->
+    <!--</a>-->
+  <!--</div>-->
+  <small>
+    <em class="text-muted">
+      Doctor's Profile
+    </em>
+  </small>
 
-	<!--<small>-->
-		<!--<em class="text-muted">-->
-			<!--Posted on-->
-			<!--<span data-ng-bind="doctor.created | date:'mediumDate'"></span>-->
-			<!--by-->
-			<!--<span data-ng-bind="doctor.user.displayName"></span>-->
-		<!--</em>-->
-	<!--</small>-->
-
-  <div class="row">
-    <div class="col-md-6 col-sm-6">
-      <div class="panel panel-default mb20 mini-box panel-hovered">
-        <div class="panel-heading">Your Camera</div>
-        <div class="panel-body">
-          <div class="clearfix">
-            <video id="localVideo" style="width: 100%;" oncontextmenu="return false;"></video>
-            <div id="localVolume" class="volume_bar"></div>
-            <div class="info left">
-              <h5 class="text-light mb0"><b>User Name:</b> {{authentication.user.displayName}}</h5>
-            </div>
-
-            <div class="right ion ion-ios-people-outline icon"></div>
-          </div>
-        </div>
-        <div class="panel-footer clearfix panel-footer-sm panel-footer-success">
-          <p class="mt0 mb0 left">Connection Speed</p>
-          <span sparkline class="right" type="bar" bar-color="#fff" width="1.15em" height="1.15em">Ok</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-6">
-      <div class="panel panel-default mb20 mini-box panel-hovered">
-        <div class="panel-heading">Guest Camera</div>
-        <div class="panel-body">
-          <div class="clearfix">
-            <div id="remotes"></div>
-
-            <div class="info left">
-              <h5 class="text-light mb0"><b>User Name:</b> {{doctor.name}}</h5>
-            </div>
-
-            <div class="right ion ion-ios-people-outline icon"></div>
-          </div>
-        </div>
-        <div class="panel-footer clearfix panel-footer-sm panel-footer-success">
-          <p class="mt0 mb0 left">Connection Speed</p>
-          <span sparkline class="right" type="bar" bar-color="#fff" width="1.15em" height="1.15em">Ok</span>
-        </div>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-md-4">
+    <p> <img src="modules/doctors/img/doctor.png"></p>
+    <p> <b>Name:</b> <i data-ng-bind="doctor.name"></i></p>
+    <p> <b>Qualification:</b> <i data-ng-bind="doctor.qualification"></i></p>
+    <p> <b>Description:</b> <i data-ng-bind="doctor.description"></i></p>
   </div>
 
 
-     <!--<h1 data-ng-bind="seller.title"></h1>-->
-    <!--<span class="glyphicon glyphicon-time" aria-hidden="true" id="timeicon" style="display: none"></span>-->
-    <!--<span id="time"></span>-->
-  <!--<div class="row">-->
-    <!--<div class="col-md-6">-->
-      <!--<div class="well">-->
-        <!--<div class="pull-right">-->
-          <!--<b>Name:</b> {{doctor.name}}<br>-->
-          <!--<b>Topic:</b> {{doctor.title}}-->
-        <!--</div>-->
-
-        <!--<div class="videoContainer">-->
-          <!--&lt;!&ndash;<video id="localVideo" style="height: 100%;" oncontextmenu="return false;"></video>&ndash;&gt;-->
-          <!--&lt;!&ndash;<div id="localVolume" class="volume_bar"></div>&ndash;&gt;-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-6">-->
-      <!--<div class="well">-->
-        <!--<div class="pull-right">-->
-          <!--&lt;!&ndash;<b>Name: {{seller.name}}<br>&ndash;&gt;-->
-          <!--&lt;!&ndash;<b>Topic: {{seller.title}}&ndash;&gt;-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
-
-  <!--<script>-->
-    <!--var video = document.querySelector("#videoElement");-->
-
-    <!--navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;-->
-
-    <!--if (navigator.getUserMedia) {-->
-      <!--navigator.getUserMedia({video: true}, handleVideo, videoError);-->
-    <!--}-->
-
-    <!--function handleVideo(stream) {-->
-      <!--video.src = window.URL.createObjectURL(stream);-->
-    <!--}-->
-
-    <!--function videoError(e) {-->
-      <!--// do something-->
-    <!--}-->
-    <!--</script>-->
+  <div class="col-md-8">
+    <div class="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar1"></div>
+  </div>
+  </div>
 </section>
-
-<script src="SimpleWebRTC/simplewebrtc.bundle.js"></script>
-<script src="SimpleWebRTC/myownchat.js"></script>

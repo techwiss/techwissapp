@@ -73,12 +73,14 @@ exports.delete = function(req, res) {
  * List of Appointments
  */
 exports.list = function(req, res) { 
-	Appointment.find().sort('-created').populate('user', 'displayName').exec(function(err, appointments) {
-		if (err) {
+	//Appointment.find().sort('-created').populate('user', 'displayName').exec(function(err, appointments) {
+  Appointment.find({'from':req.query.user}).sort('-created').populate('user', 'displayName').exec(function(err, appointments) {
+    if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+      console.log(appointments);
 			res.jsonp(appointments);
 		}
 	});

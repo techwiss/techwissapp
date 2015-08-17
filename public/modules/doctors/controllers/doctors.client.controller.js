@@ -1,11 +1,13 @@
 'use strict';
 
 // Doctors controller
-angular.module('doctors').controller('DoctorsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Doctors','Users',
-	function($scope, $stateParams, $location, Authentication, Doctors, Users) {
+angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$stateParams', '$location', 'Authentication', 'Doctors','Appointments','Users', 'uiCalendarConfig', '$compile',
+	function($scope, $http, $stateParams, $location, Authentication, Doctors, Appointments, Users, uiCalendarConfig ,$compile) {
     $scope.place;
+    $scope.newEvents = [];
     $scope.authentication = Authentication;
     $scope.name = $scope.authentication.user.displayName;
+    $scope.email = $scope.authentication.user.email;
     $scope.profilePic ="https://cdn0.iconfinder.com/data/icons/customicondesign-office6-shadow/256/doctor.png";
 
     //TimeZone Calculation
@@ -216,6 +218,7 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
         this.location.push($scope.place.geometry.location.lat());
         var doctor = new Doctors({
           name: this.name,
+          email: this.email,
           profilePic: this.profilePic,
           qualification: this.qualification,
           speciality: this.speciality,
@@ -229,6 +232,7 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
       else{
         var doctor = new Doctors({
           name: this.name,
+          email: this.email,
           profilePic: this.profilePic,
           qualification: this.qualification,
           speciality: this.speciality,
@@ -251,6 +255,7 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
         $location.path('doctors');
         // Clear form fields
         $scope.name = '';
+        $scope.email = '';
         $scope.profilePic = '';
         $scope.qualification = '';
         $scope.speciality = '';
@@ -297,10 +302,214 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$statePara
 		};
 
 		// Find existing Doctor
-		$scope.findOne = function() {
+
+		/*$scope.findOne = function() {
 			$scope.doctor = Doctors.get({ 
 				doctorId: $stateParams.doctorId
 			});
 		};
-	}
+    */
+
+    //create appointment
+    $scope.createAppointment = function() {
+      // Create new Appointment object
+      var today = new Date();
+      var appointment = new Appointments ({
+        title: this.title,
+        start:today,
+        end: today
+      });
+      // Redirect after save
+      appointment.$save(function(response) {
+        $location.path('appointments/' + response._id);
+        // Clear form fields
+        $scope.name = '';
+      }, function(errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+
+    // Find existing Doctor
+    $scope.findOne = function() {
+      $scope.doctor = Doctors.get({
+        doctorId: $stateParams.doctorId
+      });
+      console.log($scope.doctor);
+      $scope.appointments = Appointments.query({user:$stateParams.doctorId});
+      $scope.appointments.$promise.then(function (results) {
+        console.log(results);
+        angular.forEach(results, function (task, index) {
+          $scope.newEvents.push(task)
+        });
+      });
+      $scope.eventSources = [$scope.newEvents];
+    };
+
+    //calender code
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+
+    /* alert on eventClick */
+    $scope.alertOnEventClick = function( date, jsEvent, view){
+      $scope.alertMessage = (date.title + ' was clicked ');
+    };
+    /* alert on Drop */
+    $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
+      $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
+    };
+    /* alert on Resize */
+    $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
+      $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
+    };
+    /* add and removes an event source of choice */
+    $scope.addRemoveEventSource = function(sources,source) {
+      var canAdd = 0;
+      angular.forEach(sources,function(value, key){
+        if(sources[key] === source){
+          sources.splice(key,1);
+          canAdd = 1;
+        }
+      });
+      if(canAdd === 0){
+        sources.push(source);
+      }
+    };
+    /* add custom event*/
+    $scope.addEvent = function() {
+      $scope.events.push({
+        title: 'Open Sesame',
+        start: new Date(y, m, 28),
+        end: new Date(y, m, 29),
+        className: ['openSesame']
+      });
+    };
+    /* remove event */
+    $scope.remove = function(index) {
+      $scope.events.splice(index,1);
+    };
+    /* Change View */
+    $scope.changeView = function(view,calendar) {
+      uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
+    };
+    /* Change View */
+    $scope.goToDate = function(calendar, date) {
+      uiCalendarConfig.calendars[calendar].fullCalendar('gotoDate', date );
+    };
+
+    /* Change View */
+    $scope.renderCalender = function(calendar) {
+      if(uiCalendarConfig.calendars[calendar]){
+        uiCalendarConfig.calendars[calendar].fullCalendar('render');
+      }
+    };
+    /* Render Tooltip */
+    $scope.eventRender = function( event, element, view ) {
+      element.attr({'tooltip': event.title,
+        'tooltip-append-to-body': true});
+      $compile(element)($scope);
+    };
+
+    $scope.eventSources = [$scope.newEvents];
+
+    $scope.sendEmail = function (to, appointmentId) {
+      var data = ({
+        to: to,
+        subject: 'TechWiss - Video Consulting Initiation Link',
+        text: 'appointments/' + appointmentId
+      });
+
+      $http.post('/appointment-email', data).
+          then(function(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            console.log(response);
+          }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+    };
+
+    $scope.uiConfig = {
+      calendar:{
+        editable: true,
+        businessHours:true,
+        header:{
+          left: 'month,agendaWeek,agendaDay',
+          center: 'title',
+          right: 'today prev,next'
+        },
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end) {
+          window.meetingtime =start;
+          $scope.goToDate('myCalendar1',start)
+          $scope.changeView('agendaDay', 'myCalendar1')
+          if (this.name == 'agendaDay') {
+            var description = prompt('Kindly mention the description or symptoms of your Health Issues:');
+            if (description) {
+              //$scope.$apply(function(start, end){
+              var host = $scope.doctor;
+              delete host.user;
+
+              var appointment = new Appointments ({
+                title: 'Video-consulting',
+                from: $scope.doctor._id,
+                description: description,
+                start: start,
+                end: end
+              });
+
+              // Redirect after save
+              appointment.$save(function(response) {
+                $scope.sendEmail($scope.authentication.user.email,response._id);
+                $scope.sendEmail($scope.doctor.email,response._id);
+                //$location.path('appointments/' + response._id);
+                // Clear form fields
+                $scope.title = '';
+                $scope.from = '';
+                $scope.description = '';
+                $scope.start = '';
+                $scope.end = '';
+                $scope.className = '';
+                alert("invitation sent on Email !");
+              }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+              });
+
+              //$scope.events.push({
+              //  title: title,
+              //  start: start,
+              //  end: end,
+              //  allDay: allDay
+              //});
+              //});
+            }
+
+          }
+          // should call 'unselect' method here
+        }
+      }
+    };
+
+
+    $scope.rate = 3;
+    $scope.max = 5;
+    $scope.isReadonly = false;
+
+    $scope.hoveringOver = function(value) {
+      $scope.overStar = value;
+      $scope.percent = 100 * (value / $scope.max);
+    };
+
+    $scope.ratingStates = [
+      {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+      {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+      {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+      {stateOn: 'glyphicon-heart'},
+      {stateOff: 'glyphicon-off'}
+    ];
+
+  }
 ]);

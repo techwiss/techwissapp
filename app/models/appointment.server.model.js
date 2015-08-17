@@ -19,7 +19,6 @@ var AppointmentSchema = new Schema({
   description: {
     type: String,
     default: '',
-    required: 'Please fill Appointment Description',
     trim: true
   },
   className: {
@@ -29,12 +28,6 @@ var AppointmentSchema = new Schema({
   from: {
     type: Schema.ObjectId,
     ref: 'Doctor'
-  },
-  with:{
-    type: String,
-    default: '',
-    required: 'Please fill Appointment with details',
-    trim: true
   },
   start: {
     type: Date,

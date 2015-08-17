@@ -55,11 +55,12 @@ module.exports = {
         'public/modules/app/controllers/tables/app.table.ctrls.js',
         'public/modules/app/controllers/email/app.email.ctrls.js',
         'public/modules/app/controllers/todo/app.todo.js',
-        'public/modules/app/controllers/todo/app.todo.js',
-        'public/modules/app/controllers/models/js/three.js',
-        'public/modules/app/controllers/models/js/UCSCharacter.js',
-        'public/modules/app/controllers/models/js/data.gui.js',
-        'public/modules/app/controllers/models/js/orbit.js',
+        'public/modules/app/controllers/lazyload/calendar.js',
+        //'public/modules/app/controllers/todo/app.todo.js',
+        //'public/modules/app/controllers/models/js/three.js',
+        //'public/modules/app/controllers/models/js/UCSCharacter.js',
+        //'public/modules/app/controllers/models/js/data.gui.js',
+        //'public/modules/app/controllers/models/js/orbit.js',
         'public/lib/angular-google-places-autocomplete/src/autocomplete.js',
         'public/modules/app/SimpleWebRTC/socket.io.js'
       ]

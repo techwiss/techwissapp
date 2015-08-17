@@ -16,6 +16,12 @@ var DoctorSchema = new Schema({
 		required: 'Please fill Doctor name',
 		trim: true
 	},
+  email: {
+    type: String,
+    default: '',
+    required: 'Please fill Doctor email',
+    trim: true
+  },
   profilePic: {
     type: String,
     default: 'https://cdn0.iconfinder.com/data/icons/customicondesign-office6-shadow/256/doctor.png'

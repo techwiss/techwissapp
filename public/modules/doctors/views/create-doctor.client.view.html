@@ -25,6 +25,13 @@
           </div>
 
           <div class="form-group">
+            <label class="control-label" for="name">Email: </label>
+             <span data-ng-bind="email"></span>
+            <div class="controls">
+            </div>
+          </div>
+
+          <div class="form-group">
             <label class="control-label" for="description">Description</label>
             <div class="controls">
               <textarea data-ng-model="description"  rows="4" id="description" class="form-control marg_less" placeholder="Introduce Yourself" required ng-trim="false" maxlength="1500"></textarea>
