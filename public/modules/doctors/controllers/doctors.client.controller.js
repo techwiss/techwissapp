@@ -414,21 +414,24 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$
     $scope.eventSources = [$scope.newEvents];
 
     $scope.sendEmail = function (to, appointmentId) {
-      var data = ({
-        to: to,
-        subject: 'TechWiss - Video Consulting Initiation Link',
-        text: 'appointments/' + appointmentId
-      });
+      if(to) {
+        console.log("sending to " + to);
+        var data = ({
+          to: to,
+          subject: 'TechWiss - Video Consulting Initiation Link',
+          text: 'appointments/' + appointmentId
+        });
 
-      $http.post('/appointment-email', data).
-          then(function(response) {
-            // this callback will be called asynchronously
-            // when the response is available
-            console.log(response);
-          }, function(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-          });
+        $http.post('/appointment-email', data).
+            then(function (response) {
+              // this callback will be called asynchronously
+              // when the response is available
+              console.log(response);
+            }, function (response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+            });
+      }
     };
 
     $scope.uiConfig = {
