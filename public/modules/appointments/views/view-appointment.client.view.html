@@ -1,21 +1,75 @@
-<section data-ng-controller="AppointmentsController" data-ng-init="findOne()">
+
+<section class="page" data-ng-controller="AppointmentsController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1 data-ng-bind="appointment.name"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == appointment.user._id))">
-		<a class="btn btn-primary" href="/#!/appointments/{{appointment._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
+
+
+
+  <div class="row">
+    <div class="col-md-6 col-sm-6">
+      <div class="panel panel-default mb20 mini-box panel-hovered">
+        <div class="panel-heading">Your Camera</div>
+        <div class="panel-body">
+          <div class="clearfix">
+            <video id="localVideo" style="width: 100%;" oncontextmenu="return false;"></video>
+            <div id="localVolume" class="volume_bar"></div>
+            <div class="info left">
+              <h5 class="text-light mb0"><b>User Name:</b> {{authentication.user.displayName}}</h5>
+            </div>
+
+            <div class="right ion ion-ios-people-outline icon"></div>
+          </div>
+        </div>
+        <div class="panel-footer clearfix panel-footer-sm panel-footer-success">
+          <p class="mt0 mb0 left">Connection Speed</p>
+          <span sparkline class="right" type="bar" bar-color="#fff" width="1.15em" height="1.15em">Ok</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6">
+      <div class="panel panel-default mb20 mini-box panel-hovered">
+        <div class="panel-heading">Guest Camera</div>
+        <div class="panel-body">
+          <div class="clearfix">
+            <div id="remotes"></div>
+
+            <div class="info left">
+              <!--<h5 class="text-light mb0"><b>Guest:</b></h5>-->
+            </div>
+
+            <div class="right ion ion-ios-people-outline icon"></div>
+          </div>
+        </div>
+        <div class="panel-footer clearfix panel-footer-sm panel-footer-success">
+          <p class="mt0 mb0 left">Connection Speed</p>
+          <span sparkline class="right" type="bar" bar-color="#fff" width="1.15em" height="1.15em">Ok</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == appointment.user._id))">-->
+		<!--<a class="btn btn-primary" href="/#!/appointments/{{appointment._id}}/edit">-->
+			<!--<i class="glyphicon glyphicon-edit"></i>-->
+		<!--</a>-->
+		<!--<a class="btn btn-primary" data-ng-click="remove();">-->
+			<!--<i class="glyphicon glyphicon-trash"></i>-->
+		<!--</a>-->
+	<!--</div>-->
 	<small>
 		<em class="text-muted">
-			Posted on
+			Appointment requested on
 			<span data-ng-bind="appointment.created | date:'mediumDate'"></span>
 			by
 			<span data-ng-bind="appointment.user.displayName"></span>
 		</em>
 	</small>
 </section>
+
+<script src="SimpleWebRTC/simplewebrtc.bundle.js"></script>
+<script src="SimpleWebRTC/myownchat.js"></script>
+
