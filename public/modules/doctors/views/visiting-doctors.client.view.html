@@ -3,26 +3,15 @@
 
   <div class="controls">
     <input class="form-control" g-places-autocomplete ng-model="searchVisit" placeholder="Search Location"/>
-    <small>{{searchVisit.geometry.location.lng() | limitTo : 9}},{{searchVisit.geometry.location.lat()| limitTo : 9}}
- </small>
+    <small>{{searchVisit.geometry.location.lng() | limitTo : 9}},{{searchVisit.geometry.location.lat()| limitTo : 9}}</small>
+    <br/>
   </div>
 
   <div class="panel mini-box">
     <div class="panel-body">
-  <map zoom="13" center="42.360083, -71.05888">
-    <marker ng-repeat="doctor in visitingDoctor" id="{{doctor._id}}" icon="{{image}}" shape="{{shape}}" title="{{doctor.name}}" position="{{doctor.location[1]}}, {{doctor.location[0]}}"></marker>
-    <info-window ng-repeat="doctor in visitingDoctor" id="bar" visible-on-marker="{{doctor._id}}" >
-      <div ng-non-bindable="">
-        <div id="siteNotice"></div>
-        <h1 id="firstHeading" class="firstHeading">{{doctor.name}}</h1>
-        <div id="bodyContent">
-          <p>{{doctor.speciality}}</p>
-          <p>{{doctor.description}}</p>
-       </div>
-      </div>
-    </info-window>
-
-  </map>
+        <map zoom="13" center="42.360082,-71.05888">
+          <marker ng-repeat="doctor in visitingDoctor" position="{{doctor.location[1]}}, {{doctor.location[0]}}" on-click="showInfoWindowz(event, doctor)"></marker>
+        </map>
     </div>
   </div>
 </section>

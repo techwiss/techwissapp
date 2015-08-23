@@ -9,7 +9,7 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$
     $scope.name = $scope.authentication.user.displayName;
     $scope.email = $scope.authentication.user.email;
     $scope.profilePic ="https://cdn0.iconfinder.com/data/icons/customicondesign-office6-shadow/256/doctor.png";
-
+    $scope.searchVisit={};
     //TimeZone Calculation
     $scope.timeZoneArray = {
       '(GMT-12:00) International Date Line West' : 'Pacific/Wake',
@@ -603,8 +603,34 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$
           });
 
     };
-    //$scope.centerMap = searchVisit.geometry.location.lng()+","+searchVisit.geometry.location.lat();
 
+    $scope.$on('mapInitialized', function (event, map) {
+      $scope.objMapa = map;
+    });
+
+
+    $scope.centerMap = "42.360082,-71.05888";
+
+    $scope.$watch('searchVisit', function() {
+      if ($scope.searchVisit.geometry) {
+        console.log($scope.searchVisit.geometry)
+      $scope.centerMap = $scope.searchVisit.geometry.location.lat()+","+$scope.searchVisit.geometry.location.lng();
+        $scope.objMapa.setCenter(new google.maps.LatLng($scope.searchVisit.geometry.location.lat(),$scope.searchVisit.geometry.location.lng()),8);
+        }
+    }, true);
+
+    $scope.showInfoWindowz = function (event, doctor) {
+      var infowindow = new google.maps.InfoWindow();
+      var center = new google.maps.LatLng(doctor.location[1],doctor.location[0]);
+      infowindow.setContent(
+          '<img src='+doctor.profilePic+' alt="Description" with=120 height=120 />'+
+          '<h3>' + doctor.name + '</h3>'+
+          '<p><b>Speciality: </b>' + doctor.name + '</p>'+
+          '<p><b>Description: </b>' + doctor.description + '</p>'
+      );
+      infowindow.setPosition(center);
+      infowindow.open($scope.objMapa);
+    };
 
     $scope.image = {
       url: 'http://www.artgen.cz/assets/frontend/img/markers/marker-doctor.png'
