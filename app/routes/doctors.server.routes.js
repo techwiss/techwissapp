@@ -9,7 +9,10 @@ module.exports = function(app) {
 		.get(doctors.list)
 		.post(users.requiresLogin, doctors.create);
 
-	app.route('/doctors/:doctorId')
+  app.route('/doctorsvisiting')
+      .get(doctors.listVisiting)
+
+  app.route('/doctors/:doctorId')
 		.get(doctors.read)
 		.put(users.requiresLogin, doctors.hasAuthorization, doctors.update)
 		.delete(users.requiresLogin, doctors.hasAuthorization, doctors.delete);

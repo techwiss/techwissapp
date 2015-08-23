@@ -63,7 +63,8 @@ module.exports = {
         //'public/modules/app/controllers/models/js/orbit.js',
         'public/lib/angular-google-places-autocomplete/src/autocomplete.js',
         'public/modules/app/SimpleWebRTC/socket.io.js',
-          'public/lib/xml2json/xml2json.js'
+          'public/lib/xml2json/xml2json.js',
+          'public/lib/ngmap/build/scripts/ng-map.min.js'
       ]
     },
     //css: [

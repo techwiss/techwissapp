@@ -77,7 +77,11 @@ angular.module('doctors')
 			url: '/doctors',
 			templateUrl: 'modules/doctors/views/list-doctors.client.view.html'
 		}).
-		state('createDoctor', {
+        state('VisitingDoctors', {
+          url: '/doctorsvisiting',
+          templateUrl: 'modules/doctors/views/visiting-doctors.client.view.html'
+        }).
+        state('createDoctor', {
 			url: '/doctors/create',
 			templateUrl: 'modules/doctors/views/create-doctor.client.view.html'
           //resolve: {

@@ -8,6 +8,22 @@ var mongoose = require('mongoose'),
 	Doctor = mongoose.model('Doctor'),
 	_ = require('lodash');
 
+
+/**
+ * List of Doctors
+ */
+exports.listVisiting = function(req, res) {
+  Doctor.find({homeVisit:true}).sort('-created').populate('user', 'displayName').exec(function(err, doctors) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(doctors);
+    }
+  });
+};
+
 /**
  * Create a Doctor
  */
