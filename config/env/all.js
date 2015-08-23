@@ -24,6 +24,8 @@ module.exports = {
       js: [
         'public/lib/jquery/dist/jquery.js',
         'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js',
+        'public/lib/ng-file-upload/ng-file-upload-shim.min.js',
+        'public/lib/ng-file-upload/ng-file-upload.min.js',
         //'public/lib/angular/angular.js',
         //'public/lib/vendors/angular.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.js',
@@ -37,8 +39,6 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/ng-file-upload/ng-file-upload-shim.min.js',
-        'public/lib/ng-file-upload/ng-file-upload.min.js',
         'public/modules/app/controllers/plugins/angular-route.min.js',
         'public/modules/app/controllers/plugins/angular-aria.min.js',
         'public/modules/app/controllers/plugins/ui-bootstrap-tpls.min.js',
@@ -62,7 +62,8 @@ module.exports = {
         //'public/modules/app/controllers/models/js/data.gui.js',
         //'public/modules/app/controllers/models/js/orbit.js',
         'public/lib/angular-google-places-autocomplete/src/autocomplete.js',
-        'public/modules/app/SimpleWebRTC/socket.io.js'
+        'public/modules/app/SimpleWebRTC/socket.io.js',
+          'public/lib/xml2json/xml2json.js'
       ]
     },
     //css: [

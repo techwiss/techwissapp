@@ -1,0 +1,85 @@
+<section class="page page-forms-uploader" data-ng-controller="ReportsController">
+  <div class="page-wrap">
+    <!-- row -->
+    <div class="row">
+      <div class="col-sm-12">
+
+        <alert type="info" class="mb20">
+          <strong>Note:</strong> Upload all your Medical Reports & share with Doctors instantly.
+        </alert>
+
+        <!-- row -->
+        <div class="row mb20">
+          <div class="col-md-5 mb15">
+            <div class="dropzone" ngf-select ng-model="files" ngf-multiple="true" ngf-pattern="image/*" accept="image/*" ngf-drop ngf-keep="keep" ngf-keep-distinct="keepDistinct" ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+
+              <div class="drop-info">
+                <i class="ion ion-upload"></i>
+                <h3 class="mt0 text-bold">DropZone</h3>
+                <p>Drag files to upload <strong class="text-muted">(or click)</strong></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-7">
+            <table class="table table-bordered table-condensed" style="background: #fff">
+              <thead>
+              <tr>
+                <th class="col-sm-4">Name</th>
+                <th>Size</th>
+                <th>Progress</th>
+                <th class="col-sm-1">Status</th>
+                <th class="col-sm-1">Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="file in files">
+                <td class="text-bold">{{file.name}}</td>
+                <td class="small">{{file.size | number: 0}} B</td>
+                <td>
+                  <progressbar value="file.progress" class="progress-xs progress-striped" type="primary" ng-class="{active: file.isUploading()}"></progressbar>
+                </td>
+                <td class="text-center">
+                  <span class="ion ion-checkmark-circled text-success" ng-show="file.isComplete()"></span>
+                </td>
+                <td>
+                  <span class="btn btn-xs btn-danger ion ion-trash-a" ng-click="file.cancel()"></span>
+                  <span class="btn btn-xs btn-warning ion ion-pause" ng-click="file.pause()"></span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <a class="btn btn-small btn-success btn-sm" ng-click="$flow.resume()">Resume all</a>
+            <a class="btn btn-small btn-danger btn-sm" ng-click="$flow.pause()">Pause all</a>
+            <a class="btn btn-small btn-info btn-sm" ng-click="$flow.cancel()">Cancel all</a>
+          </div>
+
+
+        </div> <!-- inner row -->
+
+      </div>  <!-- #end col -->
+    </div> <!-- #end row -->
+
+
+
+  </div> <!-- #end page-wrap -->
+
+  <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="fileName">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="fileName" id="fileName" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

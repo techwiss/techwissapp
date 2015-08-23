@@ -13,8 +13,19 @@
               <h6><i>Profile Picture</i></h6>
               <div>
                 Choose File:
-                <div class="btn btn-primary" ngf-select ng-model="files" ngf-accept="'image/*'" >Upload Image</div>
+                <div class="btn btn-primary" ngf-select ng-model="files" ngf-multiple="true" ngf-pattern="image/*" accept="image/*">Upload Image</div>
               </div>
+            <br/>
+            <div ng-repeat="file in files">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width:{{file.progress}}%;">
+                  {{file.name}} : {{file.progress}}
+                </div>
+              </div>
+              <button class="btn btn-ttc" type="button" ng-click="abort($index)" ng-show="file.progress != 100">Abort</button>
+            </div>
+
+
           </div>
 
           <div class="form-group">
@@ -37,13 +48,6 @@
               <textarea data-ng-model="description"  rows="4" id="description" class="form-control marg_less" placeholder="Introduce Yourself" required ng-trim="false" maxlength="1500"></textarea>
             </div>
           </div>
-
-          <!--<div class="form-group">-->
-            <!--<label class="control-label" for="location">Location</label>-->
-            <!--<div class="controls">-->
-              <!--<input type="text" data-ng-model="location" id="location" class="form-control marg_less" placeholder="Location" required>-->
-            <!--</div>-->
-          <!--</div>-->
 
 
 </div>

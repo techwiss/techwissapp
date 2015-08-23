@@ -23,10 +23,6 @@ var fs = require('fs'),
 	consolidate = require('consolidate'),
 	path = require('path');
 
-//multer file upload
-//var multer  = require('multer');
-var done=false;
-
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
@@ -123,30 +119,9 @@ module.exports = function(db) {
 	});
 
 
-  //app.use(multer({ dest: 'public/uploads/',
-  //  limits: {
-  //    fieldNameSize: 999999999,
-  //    fieldSize: 999999999
-  //  },
-  //  rename: function (fieldname, filename, req, res) {
-  //    //return req.body.data+'_'+Date.now();
-  //    return req.body.data;
-  //  },
-  //  onFileUploadStart: function (file) {
-  //    console.log(file.originalname + ' is starting ...')
-  //  },
-  //  onFileUploadComplete: function (file) {
-  //    console.log(file.fieldname + ' uploaded to  ' + file.path)
-  //    done=true;
-  //  }
-  //}));
 
-  //app.post('/api/upload',function(req,res){
-  //  if(done==true){
-  //    console.log(req.files.file.name);
-  //    res.end(req.files.file.name);
-  //  }
-  //});
+
+
 
 
 

@@ -1,8 +1,8 @@
 'use strict';
 
 // Doctors controller
-angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$stateParams', '$location', 'Authentication', 'Doctors','Appointments','Users', 'uiCalendarConfig', '$compile',
-	function($scope, $http, $stateParams, $location, Authentication, Doctors, Appointments, Users, uiCalendarConfig ,$compile) {
+angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$stateParams', '$location', 'Authentication', 'Doctors','Appointments','Users', 'uiCalendarConfig', '$compile','Upload',
+	function($scope, $http, $stateParams, $location, Authentication, Doctors, Appointments, Users, uiCalendarConfig ,$compile, $upload) {
     $scope.place;
     $scope.newEvents = [];
     $scope.authentication = Authentication;
@@ -170,33 +170,110 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$
     $scope.timeZone = $scope.defaultTimeZone;
 
     //Upload ProfilePic
-    /*
-    $scope.$watch('files', function () {
-      $scope.upload($scope.files);
+    $scope.$watch('files', function() {
+      $scope.onFileSelect($scope.files);
     });
 
+    $scope.imageUploads = [];
+    $scope.abort = function(index) {
+      $scope.upload[index].abort();
+      $scope.upload[index] = null;
+    };
+
+
+    $scope.onFileSelect = function (files) {
+      $scope.files = files;
+      $scope.upload = [];
+      if (files && files.length) {
+        var bucketName;
+        $http.get('/api/config').success(function(response) {
+        bucketName = response.awsConfig.bucket;
+      })
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        file.progress = parseInt(0);
+        (function (file, i) {
+          console.log(file.name.split('.').pop());
+          $http.get('/api/s3Policy?mimeType=' + file.type +"&folder="+ "profilePic/").success(function (response) {
+            var s3Params = response;
+            $scope.upload[i] = $upload.upload({
+              url: 'http://' + bucketName + '.s3.amazonaws.com/',
+              method: 'POST',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+              },
+              fields: {
+                'key': 'profilePic/' + $scope.authentication.user._id + '_profilepic.' + file.name.split('.').pop(),
+                'acl': 'private',
+                'Content-Type': file.type,
+                'AWSAccessKeyId': s3Params.AWSAccessKeyId,
+                'success_action_status': '201',
+                'Policy': s3Params.s3Policy,
+                'Signature': s3Params.s3Signature
+              },
+              file: file
+            });
+            $scope.upload[i]
+                .then(function (response) {
+                  file.progress = parseInt(100);
+                  if (response.status === 201) {
+                    var data = xml2json.parser(response.data),
+                        parsedData;
+                    parsedData = {
+                      location: data.postresponse.location,
+                      bucket: data.postresponse.bucket,
+                      key: data.postresponse.key,
+                      etag: data.postresponse.etag
+                    };
+                    $scope.profilePic = decodeURIComponent(data.postresponse.location);
+                    console.log($scope.profilePic);
+                  } else {
+                    alert('Upload Failed');
+                  }
+                }, null, function (evt) {
+                  console.log(parseInt(100.0 * evt.loaded / evt.total))
+                  file.progress = parseInt(100.0 * evt.loaded / evt.total);
+                });
+          });
+        }(file, i));
+      }
+    }
+    };
+
+
+    /*
     $scope.upload = function (files) {
       console.log($scope.authentication.user._id)
+      console.log(files)
       if (files && files.length) {
         for (var i = 0; i < files.length; i++) {
           var file = files[i];
-          Upload.upload({
-            url: 'api/upload',
+          console.log(file)
+          $upload.upload({
+            url: '/upload',
             data:  $scope.authentication.user._id,
             fields: {'user': $scope.authentication.user._id},
             file: file
           }).progress(function (evt) {
+            console.log("progress");
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             $scope.profilePic='http://cookingonions.com/wp-content/plugins/recipe-card/images/loading.gif'
             console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
           }).success(function (data, status, headers, config) {
+            console.log("done");
             $scope.profilePic='/uploads/'+data;
             console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
           });
         }
       }
     };
-*/
+    */
+
+
     // Create new Doctor
     $scope.userProfileFlagUpdate = function(urs) {
       $scope.success = $scope.error = null;

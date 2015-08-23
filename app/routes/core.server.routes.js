@@ -7,4 +7,11 @@ module.exports = function(app) {
 
   app.route('/appointment-email')
       .post(core.sendEmail);
+
+  app.route('/api/s3Policy')
+      .get(core.getS3Policy);
+
+  app.route('/api/config')
+      .get(core.getClientConfig);
+
 };
