@@ -414,7 +414,6 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$
       console.log($scope.doctor);
       $scope.appointments = Appointments.query({user:$stateParams.doctorId});
       $scope.appointments.$promise.then(function (results) {
-        console.log(results);
         angular.forEach(results, function (task, index) {
           $scope.newEvents.push(task)
         });
@@ -593,6 +592,18 @@ angular.module('doctors').controller('DoctorsController', ['$scope', '$http' ,'$
       {stateOff: 'glyphicon-off'}
     ];
 
+    $scope.getVisiting = function() {
+      $http.get('/doctorsvisiting').
+          then(function(response) {
+            $scope.visitingDoctor = response.data;
+            console.log($scope.visitingDoctor);
+          }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+
+    };
+    //$scope.centerMap = searchVisit.geometry.location.lng()+","+searchVisit.geometry.location.lat();
 
 
     $scope.image = {
