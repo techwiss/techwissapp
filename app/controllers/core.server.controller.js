@@ -73,8 +73,8 @@ exports.getS3Policy = function(req, res) {
 var transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'gehlotchirag@gmail.com',
-    pass: 'Gandhi007'
+    user: 'gehlotchirag1988@gmail.com',
+    pass: 'Gandhi007.'
   }
 });
 
@@ -91,7 +91,7 @@ exports.index = function(req, res) {
 exports.sendEmail = function(req, res) {
   var data = req.body;
   var mailOptions = {
-    from: 'TechWiss Team <gehlotchirag@gmail.com>',
+    from: 'TechWiss Team <gehlotchirag1988@gmail.com>',
     to: data.to,
     subject: data.subject,
     text: data.text
